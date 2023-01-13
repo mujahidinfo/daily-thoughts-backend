@@ -4,13 +4,18 @@
   "description": "A Daily thoughts tracker app API.",
   "main": "index.js",
   "scripts": {
+    "dev": "nodemon server.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "Mujahid Islam",
   "license": "ISC",
   "dependencies": {
+    "@prisma/client": "^4.8.1",
     "dotenv": "^16.0.3",
     "express": "^4.18.2",
     "nodemon": "^2.0.20"
+  },
+  "devDependencies": {
+    "prisma": "^4.8.1"
   }
 }
