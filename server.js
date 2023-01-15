@@ -3,7 +3,7 @@ const env = require("dotenv").config();
 // Import the router
 // connet to prisma database
 const { PrismaClient } = require("@prisma/client");
-const router = require("./router/v1/");
+const routers = require("./router/v1/index");
 const prisma = new PrismaClient();
 
 const app = express();
@@ -13,8 +13,18 @@ app.use(express.json());
 app.get("/", (req, res) => {
   res.send({ message: "Hello World!" });
 });
-app.use("api/v1", router);
+// use the router
+app.use("/api/v1", routers);
 
-app.listen(process.env.PORT || 8000, () => {
-  console.log(`Server is running on port ${process.env.PORT || 8000}`);
+// connect to the database
+prisma.$connect().then(() => {
+  const port = process.env.PORT || 8000;
+  app.listen(port, () => {
+    console.log(`Server is running on port ${port}`);
+  });
+});
+
+// close the database connection
+process.on("SIGINT", () => {
+  prisma.$disconnect();
 });
