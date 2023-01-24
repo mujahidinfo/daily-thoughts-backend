@@ -3,12 +3,19 @@ const env = require("dotenv").config();
 // Import the router
 // connet to prisma database
 const { PrismaClient } = require("@prisma/client");
+const cors = require("cors");
 const routers = require("./router/v1/index");
 const prisma = new PrismaClient();
 
 const app = express();
 // use express.json() to parse JSON bodies
 app.use(express.json());
+// cors middleware
+corsOptions = {
+  origin: "http://localhost:3000",
+  credentials: true,
+};
+app.use(cors(corsOptions));
 
 app.get("/", (req, res) => {
   res.send({ message: "Hello World!" });

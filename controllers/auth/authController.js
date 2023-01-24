@@ -50,11 +50,21 @@ const login = async (req, res) => {
       return res.status(400).send("Incorrect password");
     }
 
-    const token = jwt.sign({ userId: user.id }, process.env.JWT_SECRET);
+    const userObject = {
+      userId: user.id,
+      username: user.name,
+      email: user.email,
+    };
 
-    res.cookie("jwt", token, { httpOnly: true, maxAge: 24 * 60 * 60 * 1000 }); // 1 day in milliseconds
+    const token = jwt.sign(userObject, process.env.JWT_SECRET);
+    console.log("token", token);
 
-    res.status(200).json({ user: user.id });
+    res.cookie("jwt", token, {
+      httpOnly: true,
+      maxAge: 24 * 60 * 60 * 1000,
+    }); // 1 day in milliseconds
+
+    res.status(200).json(userObject);
   } catch (err) {
     res.status(400).send(err);
   }
