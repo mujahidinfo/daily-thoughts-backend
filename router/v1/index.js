@@ -8,6 +8,7 @@ const {
   login,
   logout,
   getPostsByUser,
+  getUser,
 } = require("../../controllers");
 const express = require("express");
 const { requireAuth } = require("../../middleware/auth");
@@ -28,6 +29,9 @@ router.post("/posts/create", requireAuth, createPost);
 router.put("/posts/:id", requireAuth, updatePost);
 // delete a post
 router.delete("/posts/:id", requireAuth, deletePost);
+
+// Get User
+router.get("/user", requireAuth, getUser);
 
 // export the router
 module.exports = router;
