@@ -8,6 +8,11 @@ const getUser = async (req, res) => {
       where: {
         id: parseInt(req.body.user),
       },
+      select: {
+        id: true,
+        name: true,
+        email: true,
+      },
     });
     res.status(200).json(user);
   } catch (error) {
