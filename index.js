@@ -35,3 +35,5 @@ prisma.$connect().then(() => {
 process.on("SIGINT", () => {
   prisma.$disconnect();
 });
+
+module.exports = app;
