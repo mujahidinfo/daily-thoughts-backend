@@ -12,13 +12,9 @@ const app = express();
 app.use(express.json());
 // cors middleware
 corsOptions = {
-  origin: [
-    "http://localhost:3000",
-    "https://daily-thoughts-backend.vercel.app",
-  ],
-  credentials: true,
+  origin: "*",
 };
-app.use(cors(corsOptions || "*"));
+app.use(cors(corsOptions));
 
 app.get("/", (req, res) => {
   res.send({ message: "Hello World!" });
