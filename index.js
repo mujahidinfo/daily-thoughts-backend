@@ -11,11 +11,14 @@ const app = express();
 // use express.json() to parse JSON bodies
 app.use(express.json());
 // cors middleware
-// corsOptions = {
-//   origin: "http://localhost:3000",
-//   credentials: true,
-// };
-app.use(cors());
+corsOptions = {
+  origin: [
+    "http://localhost:3000",
+    "https://daily-thoughts-backend.vercel.app",
+  ],
+  credentials: true,
+};
+app.use(cors(corsOptions || "*"));
 
 app.get("/", (req, res) => {
   res.send({ message: "Hello World!" });
