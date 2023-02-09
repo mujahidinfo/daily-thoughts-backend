@@ -11,11 +11,11 @@ const app = express();
 // use express.json() to parse JSON bodies
 app.use(express.json());
 // cors middleware
-corsOptions = {
-  origin: "http://localhost:3000",
-  credentials: true,
-};
-app.use(cors(corsOptions));
+// corsOptions = {
+//   origin: "http://localhost:3000",
+//   credentials: true,
+// };
+app.use(cors());
 
 app.get("/", (req, res) => {
   res.send({ message: "Hello World!" });
